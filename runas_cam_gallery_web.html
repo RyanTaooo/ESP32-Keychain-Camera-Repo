@@ -1,0 +1,145 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b1f"><title>Runa's Cam</title><style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;margin:0}
+body{color:#eef1ff;display:flex;flex-direction:column;overflow:hidden;
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+background:linear-gradient(180deg,#080b1f 0%,#0f1436 55%,#171d47 100%)}
+.sky,.sp1,.sp2{position:fixed;inset:0;z-index:0;pointer-events:none}
+.sky{inset:-10%;background:
+radial-gradient(2px 2px at 8% 14%,#fff,transparent),radial-gradient(2px 2px at 20% 30%,#dfe6ff,transparent),
+radial-gradient(2px 2px at 33% 10%,#fff,transparent),radial-gradient(2px 2px at 46% 24%,#cdd6ff,transparent),
+radial-gradient(2px 2px at 58% 12%,#fff,transparent),radial-gradient(2px 2px at 71% 28%,#fff,transparent),
+radial-gradient(2px 2px at 84% 9%,#dfe6ff,transparent),radial-gradient(2px 2px at 93% 33%,#cdd6ff,transparent),
+radial-gradient(2px 2px at 12% 52%,#fff,transparent),radial-gradient(2px 2px at 29% 64%,#fff,transparent),
+radial-gradient(2px 2px at 43% 55%,#dfe6ff,transparent),radial-gradient(2px 2px at 61% 69%,#cdd6ff,transparent),
+radial-gradient(2px 2px at 77% 60%,#fff,transparent),radial-gradient(2px 2px at 89% 74%,#fff,transparent),
+radial-gradient(2px 2px at 18% 86%,#fff,transparent),radial-gradient(2px 2px at 39% 93%,#cdd6ff,transparent),
+radial-gradient(2px 2px at 63% 89%,#fff,transparent),radial-gradient(2px 2px at 85% 95%,#dfe6ff,transparent);
+animation:drift 130s ease-in-out infinite alternate,tw 6s ease-in-out infinite}
+.sp1{filter:drop-shadow(0 0 4px rgba(255,255,255,.95));background:
+radial-gradient(3px 3px at 25% 20%,#fff,transparent),radial-gradient(3px 3px at 68% 40%,#fff,transparent),
+radial-gradient(3px 3px at 50% 78%,#fff,transparent);animation:spk 2.8s ease-in-out infinite}
+.sp2{filter:drop-shadow(0 0 5px rgba(200,215,255,.95));background:
+radial-gradient(3px 3px at 82% 22%,#fff,transparent),radial-gradient(3px 3px at 15% 70%,#fff,transparent),
+radial-gradient(4px 4px at 90% 62%,#fff,transparent);animation:spk 4.3s ease-in-out infinite;animation-delay:1.2s}
+@keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(-20px,-26px,0)}}
+@keyframes tw{0%,100%{opacity:.55}50%{opacity:.95}}
+@keyframes spk{0%,100%{opacity:.12}50%{opacity:1}}
+header{flex:0 0 auto;position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px 18px 14px;text-align:center}
+.moon{width:56px;height:56px;border-radius:50%;position:relative;
+background:radial-gradient(circle at 36% 34%,#fffef7,#efe9d2 68%,#d8d1b4);
+box-shadow:0 0 26px 6px rgba(240,238,205,.5),inset -6px -6px 12px rgba(0,0,0,.08)}
+.moon i{position:absolute;border-radius:50%;background:rgba(0,0,0,.05)}
+.moon i:nth-child(1){width:11px;height:11px;top:14px;left:30px}
+.moon i:nth-child(2){width:8px;height:8px;top:33px;left:16px}
+.moon i:nth-child(3){width:5px;height:5px;top:10px;left:14px}
+h1{margin:0;font-family:"Noteworthy","Marker Felt","Chalkboard SE","Comic Sans MS",cursive;
+font-size:30px;font-weight:700;letter-spacing:.5px;text-shadow:0 0 18px rgba(170,184,255,.4)}
+#grid{flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));
+gap:10px;padding:6px 14px 16px;align-content:start}
+.card{position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;cursor:pointer;background:#11162f;
+border:1px solid rgba(255,255,255,.12);transition:transform .12s,box-shadow .15s}
+.card img{width:100%;height:100%;object-fit:cover;display:block}
+.card:active{transform:scale(.97)}
+.card.sel{border-color:#aab8ff;box-shadow:0 0 0 2px #aab8ff,0 0 16px rgba(160,180,255,.55)}
+.card.sel::after{content:"";position:absolute;inset:0;background:rgba(130,150,255,.20)}
+.check{position:absolute;top:7px;left:7px;width:22px;height:22px;border-radius:50%;z-index:2;
+background:rgba(10,14,35,.55);border:1.5px solid rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;font-size:13px;color:transparent}
+.card.sel .check{background:#8aa0ff;border-color:#fff;color:#0a0e23}
+.exp{position:absolute;bottom:6px;right:6px;width:24px;height:24px;border-radius:8px;z-index:2;
+background:rgba(10,14,35,.55);display:flex;align-items:center;justify-content:center;font-size:13px;color:#dfe4ff;text-decoration:none}
+.empty{grid-column:1/-1;text-align:center;color:#9aa3d4;padding:60px 12px;font-size:15px;line-height:1.6}
+.bar{flex:0 0 auto;position:relative;z-index:2;display:flex;align-items:center;gap:8px;
+padding:12px 14px calc(12px + env(safe-area-inset-bottom));
+background:rgba(10,13,34,.82);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid rgba(255,255,255,.1)}
+.bar .cnt{flex:1;font-size:13.5px;color:#c3caf0;text-align:center}
+button{font-family:inherit;font-size:14px;font-weight:600;border:none;border-radius:11px;padding:11px 14px;cursor:pointer;color:#fff}
+.sa{background:rgba(255,255,255,.1);color:#dfe4ff}
+.dl{background:linear-gradient(135deg,#6d7cff,#9aa8ff);color:#0a0e23}
+.del{background:rgba(255,90,110,.16);color:#ff9fb0}
+button:disabled{opacity:.4;cursor:default}
+.lb{display:none;position:fixed;inset:0;z-index:50;background:rgba(6,8,22,.97);flex-direction:column}
+.lbbar{display:flex;align-items:center;gap:10px;padding:14px;border-bottom:1px solid rgba(255,255,255,.12)}
+.lbbar span{flex:1;font-size:13.5px;color:#dfe4ff;line-height:1.4}
+.lbimgs{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:16px;display:flex;flex-direction:column;gap:16px;align-items:center}
+.lbimgs img{width:100%;max-width:430px;border-radius:12px}
+</style></head><body>
+<div class="sky"></div><div class="sp1"></div><div class="sp2"></div>
+<header><div class="moon"><i></i><i></i><i></i></div><h1>Runa's Cam</h1></header>
+<div id="grid"></div>
+<div class="bar">
+<button class="sa" onclick="selectAll()">Select all</button>
+<span class="cnt" id="cnt">0 selected</span>
+<button class="dl" id="dlb" onclick="saveSel()" disabled>Save</button>
+<button class="del" id="delb" onclick="deleteSel()" disabled>Delete</button>
+</div>
+<div id="lb" class="lb">
+<div class="lbbar"><span>Long-press a photo, then tap "Save to Photos" &#x1F319;</span><button class="sa" onclick="closeLb()">Done</button></div>
+<div id="lbimgs" class="lbimgs"></div>
+</div>
+<script>
+// ---- Portfolio demo data: blank placeholder tiles ----
+const FILES=[
+{n:"2026-08-10_18-42-07.jpg"},{n:"2026-08-10_19-05-33.jpg"},{n:"2026-08-11_08-14-21.jpg"},
+{n:"2026-08-11_12-30-02.jpg"},{n:"2026-08-11_17-55-48.jpg"},{n:"2026-08-11_21-09-15.jpg"},
+{n:"2026-08-12_07-40-58.jpg"},{n:"2026-08-12_09-22-36.jpg"},{n:"2026-08-12_10-01-11.jpg"},
+{n:"2026-08-12_11-45-29.jpg"},{n:"2026-08-12_13-08-54.jpg"},{n:"2026-08-12_14-17-40.jpg"}
+];
+// Blank placeholder image (subtle dark tile with faint moon glow)
+const PLACEHOLDER='data:image/svg+xml;utf8,'+encodeURIComponent(
+'<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300">'
++'<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">'
++'<stop offset="0" stop-color="#1a2048"/><stop offset="1" stop-color="#11162f"/></linearGradient></defs>'
++'<rect width="300" height="300" fill="url(#g)"/>'
++'<circle cx="150" cy="140" r="34" fill="none" stroke="#3b4478" stroke-width="3"/>'
++'<circle cx="150" cy="140" r="14" fill="#3b4478"/>'
++'</svg>');
+let sel=new Set();
+const grid=document.getElementById('grid');
+function build(){
+  grid.innerHTML='';
+  if(!FILES.length){grid.innerHTML='<p class="empty">No photos yet \u{1F319}<br>Tap the camera button to capture one.</p>';updateBar();return;}
+  FILES.forEach(f=>{
+    const c=document.createElement('div');c.className='card';c.dataset.n=f.n;
+    c.onclick=()=>tog(f.n,c);
+    const im=document.createElement('img');im.loading='lazy';im.src=PLACEHOLDER;im.alt='';
+    const ck=document.createElement('div');ck.className='check';ck.textContent='\u2713';
+    const ex=document.createElement('a');ex.className='exp';ex.textContent='\u2922';
+    ex.href='#';ex.onclick=(e)=>{e.preventDefault();e.stopPropagation();};
+    c.appendChild(im);c.appendChild(ck);c.appendChild(ex);grid.appendChild(c);
+  });
+  updateBar();
+}
+function tog(n,c){ if(sel.has(n)){sel.delete(n);c.classList.remove('sel');}else{sel.add(n);c.classList.add('sel');} updateBar(); }
+function selectAll(){
+  const all=sel.size!==FILES.length; sel.clear();
+  document.querySelectorAll('.card').forEach(c=>{ if(all){sel.add(c.dataset.n);c.classList.add('sel');}else{c.classList.remove('sel');} });
+  updateBar();
+}
+function updateBar(){
+  document.getElementById('cnt').textContent=sel.size+' selected';
+  document.getElementById('dlb').disabled=sel.size===0;
+  document.getElementById('delb').disabled=sel.size===0;
+}
+function saveSel(){
+  if(!sel.size)return;
+  const box=document.getElementById('lbimgs');box.innerHTML='';
+  Array.from(sel).forEach(n=>{ const im=document.createElement('img');im.src=PLACEHOLDER;box.appendChild(im); });
+  document.getElementById('lb').style.display='flex';
+}
+function closeLb(){ document.getElementById('lb').style.display='none'; }
+function deleteSel(){
+  if(!sel.size)return;
+  for(const n of Array.from(sel)){
+    const i=FILES.findIndex(x=>x.n===n);if(i>=0)FILES.splice(i,1);
+    document.querySelectorAll('.card').forEach(c=>{ if(c.dataset.n===n)c.remove(); });
+    sel.delete(n);
+  }
+  if(!FILES.length)build();
+  updateBar();
+}
+build();
+</script></body></html>
